@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BookLoop — Campus Book Exchange</title>
+<meta name="description" content="A student-friendly book donation and exchange prototype.">
+<style>
+:root{--ink:#17211d;--muted:#68756e;--paper:#f6f7f2;--card:#fff;--green:#1e694b;--green2:#dff1e6;--lime:#d8f36a;--line:#e4e9e2;--orange:#f3b77c;--shadow:0 12px 35px rgba(26,49,37,.07)}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}.app{max-width:1240px;margin:auto;padding:22px 24px 50px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:28px}.brand{display:flex;align-items:center;gap:11px;font-weight:850;font-size:22px;letter-spacing:-.7px}.logo{width:42px;height:42px;border-radius:14px;background:var(--green);color:white;display:grid;place-items:center;font-size:21px;box-shadow:0 7px 15px #1e694b25}.brand small{display:block;color:var(--muted);font-size:11px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;margin-top:-3px}.top-actions{display:flex;align-items:center;gap:10px}.pill{border:1px solid var(--line);background:white;border-radius:99px;padding:9px 14px;font-size:13px;color:var(--muted)}.avatar{width:37px;height:37px;border-radius:50%;background:var(--lime);display:grid;place-items:center;font-weight:800}.hero{background:var(--green);color:white;border-radius:28px;padding:34px 36px;display:grid;grid-template-columns:1.35fr .65fr;gap:22px;position:relative;overflow:hidden;box-shadow:var(--shadow)}.hero:after{content:"";position:absolute;width:300px;height:300px;border:1px solid #ffffff24;border-radius:50%;right:-90px;top:-125px;box-shadow:0 0 0 28px #ffffff08,0 0 0 60px #ffffff06}.eyebrow{text-transform:uppercase;font-size:11px;letter-spacing:1.7px;color:#c8ebd3;font-weight:800}.hero h1{font-size:clamp(30px,4vw,49px);line-height:1.08;letter-spacing:-1.8px;max-width:580px;margin:12px 0}.hero p{color:#d9e9de;max-width:550px;margin:0 0 22px}.btn{border:0;border-radius:12px;padding:11px 16px;font-weight:750;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:transform .15s,filter .15s}.btn:hover{transform:translateY(-1px);filter:brightness(.98)}.btn-primary{background:var(--lime);color:#24311c}.btn-light{background:white;color:var(--green)}.btn-ghost{background:#f0f5f1;color:var(--green);border:1px solid var(--line)}.btn-danger{background:#fff0ec;color:#a23c2a}.hero-art{display:flex;align-items:center;justify-content:center;min-height:190px;position:relative;z-index:1}.book-stack{position:relative;width:210px;height:165px;transform:rotate(-7deg)}.book{position:absolute;width:155px;height:43px;border-radius:8px 12px 12px 8px;box-shadow:0 8px 13px #001c1133;border-left:8px solid #ffffff80;display:flex;align-items:center;padding-left:15px;font-weight:800;font-size:12px;letter-spacing:.6px}.book.one{background:#f1c17d;bottom:12px;left:25px;transform:rotate(7deg)}.book.two{background:#dbe6b6;bottom:52px;left:40px;transform:rotate(-3deg)}.book.three{background:#e9a29a;bottom:92px;left:17px;transform:rotate(4deg)}.spark{position:absolute;color:var(--lime);font-size:30px}.spark.a{right:4px;top:6px}.spark.b{left:2px;top:30px;font-size:20px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:22px 0 28px}.stat{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:17px 19px;display:flex;align-items:center;gap:13px}.stat-icon{width:42px;height:42px;border-radius:13px;background:var(--green2);display:grid;place-items:center;font-size:20px}.stat strong{font-size:24px;line-height:1.1;display:block;letter-spacing:-.8px}.stat span{color:var(--muted);font-size:12px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin:0 0 15px}.section-head h2{font-size:23px;letter-spacing:-.8px;margin:0}.section-head p{margin:4px 0 0;color:var(--muted);font-size:13px}.tabs{display:flex;gap:6px;background:#e9eee8;padding:5px;border-radius:13px;margin-bottom:18px;width:max-content;max-width:100%;overflow:auto}.tab{border:0;background:transparent;color:var(--muted);padding:9px 13px;border-radius:9px;font-size:13px;font-weight:750;white-space:nowrap}.tab.active{background:white;color:var(--green);box-shadow:0 2px 7px #203a2b0d}.toolbar{display:flex;gap:10px;margin-bottom:18px}.search{position:relative;flex:1}.search span{position:absolute;left:14px;top:11px;color:#7e8c83}.search input{width:100%;padding:11px 13px 11px 40px;border:1px solid var(--line);border-radius:12px;background:white;outline:none}.search input:focus,input:focus,select:focus,textarea:focus{border-color:#6a9d7e;box-shadow:0 0 0 3px #1e694b12}.select{border:1px solid var(--line);border-radius:12px;background:white;padding:10px 12px;color:var(--ink)}.book-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.book-card{background:white;border:1px solid var(--line);border-radius:20px;padding:16px;box-shadow:0 5px 18px #263c2b04;display:flex;flex-direction:column;min-width:0}.cover{height:145px;border-radius:14px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;margin-bottom:15px}.cover:before{content:"";position:absolute;width:130px;height:130px;border:1px solid #ffffff66;border-radius:50%;right:-25px;top:-42px}.cover:after{content:"";position:absolute;width:95px;height:95px;border:1px solid #ffffff55;border-radius:50%;left:-22px;bottom:-40px}.cover-icon{font-size:49px;filter:drop-shadow(0 8px 4px #00000010);z-index:1}.cover-label{position:absolute;left:14px;bottom:11px;color:#26332c;font-size:10px;font-weight:850;letter-spacing:1.2px;text-transform:uppercase;z-index:1}.tag{font-size:10px;font-weight:850;letter-spacing:.7px;text-transform:uppercase;border-radius:99px;padding:5px 8px;background:#e5f4e9;color:#246344;display:inline-flex;width:max-content}.tag.orange{background:#fff0df;color:#92521c}.tag.gray{background:#edf0ed;color:#67716a}.book-card h3{font-size:17px;letter-spacing:-.4px;margin:9px 0 3px;line-height:1.25}.author{color:var(--muted);font-size:12px;margin-bottom:11px}.meta{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:13px}.meta span{background:#f4f6f3;border-radius:7px;padding:5px 7px;color:#56635a;font-size:11px}.card-bottom{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:auto;padding-top:13px;border-top:1px solid #edf0eb}.owner{font-size:11px;color:var(--muted);min-width:0}.owner strong{display:block;color:var(--ink);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.card-bottom .btn{font-size:12px;padding:9px 11px;white-space:nowrap}.empty{grid-column:1/-1;text-align:center;background:white;border:1px dashed #cbd5cc;padding:42px;border-radius:18px;color:var(--muted)}.lower{display:grid;grid-template-columns:1.15fr .85fr;gap:18px;margin-top:28px}.panel{background:white;border:1px solid var(--line);border-radius:20px;padding:21px}.panel h2{font-size:19px;letter-spacing:-.6px;margin:0}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:16px}.request-list{display:grid;gap:10px}.request{border:1px solid var(--line);border-radius:13px;padding:13px;display:flex;align-items:center;justify-content:space-between;gap:12px}.request h4{margin:0 0 3px;font-size:13px}.request p{margin:0;color:var(--muted);font-size:11px}.request-actions{display:flex;gap:5px;flex-wrap:wrap}.request-actions .btn{padding:7px 9px;font-size:11px}.status{font-size:10px;font-weight:850;text-transform:uppercase;letter-spacing:.4px;color:#8a6119;background:#fff2d8;border-radius:99px;padding:5px 7px;white-space:nowrap}.status.Approved{background:#e1f5e7;color:#21653f}.status.Rejected{background:#ffebe7;color:#a23c2a}.status.Pending{background:#fff2d8;color:#8a6119}.steps{display:grid;gap:14px}.step{display:flex;gap:12px;align-items:flex-start}.step-num{width:30px;height:30px;border-radius:10px;background:var(--green2);color:var(--green);font-weight:850;display:grid;place-items:center;flex-shrink:0}.step strong{font-size:13px;display:block}.step p{font-size:12px;color:var(--muted);margin:2px 0 0}.footer{margin-top:28px;display:flex;justify-content:space-between;gap:15px;color:var(--muted);font-size:11px;padding:0 3px}.modal-backdrop{position:fixed;inset:0;background:#0b1b12a8;display:none;align-items:center;justify-content:center;padding:18px;z-index:20}.modal-backdrop.open{display:flex}.modal{background:white;border-radius:22px;padding:24px;width:min(520px,100%);max-height:90vh;overflow:auto;box-shadow:0 25px 80px #0003}.modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:17px}.modal-head h2{font-size:22px;letter-spacing:-.8px;margin:0}.close{border:0;background:#f0f3ef;width:34px;height:34px;border-radius:10px;font-size:20px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}.field label{font-size:12px;font-weight:800;color:#435047}.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 11px;outline:none;background:white}.field textarea{resize:vertical;min-height:75px}.form-actions{display:flex;justify-content:flex-end;gap:9px;margin-top:18px}.toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,20px);background:#14271c;color:white;padding:12px 17px;border-radius:12px;font-size:13px;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:.25s;z-index:50;max-width:90vw}.toast.show{opacity:1;transform:translate(-50%,0)}.notice{font-size:11px;color:var(--muted);background:#f6f8f4;padding:10px 12px;border-radius:10px;margin-top:12px}.hidden{display:none!important}
+@media(max-width:900px){.hero{grid-template-columns:1fr .5fr;padding:28px}.stats{grid-template-columns:repeat(2,1fr)}.book-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.lower{grid-template-columns:1fr}}
+@media(max-width:620px){.app{padding:15px 13px 35px}.topbar{margin-bottom:18px}.brand{font-size:19px}.top-actions .pill{display:none}.hero{grid-template-columns:1fr;padding:25px 22px;border-radius:22px}.hero-art{display:none}.hero h1{font-size:36px}.stats{gap:9px;margin:14px 0 24px}.stat{padding:12px;gap:9px}.stat-icon{width:34px;height:34px;font-size:17px}.stat strong{font-size:21px}.stat span{font-size:10px}.section-head{align-items:flex-start;flex-direction:column}.toolbar{flex-direction:column}.book-grid{grid-template-columns:1fr}.cover{height:125px}.lower{margin-top:20px}.panel{padding:16px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.request{align-items:flex-start;flex-direction:column}.footer{flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand"><div class="logo">↗</div><div>BookLoop<small>Campus book community</small></div></div>
+    <div class="top-actions"><span class="pill">♧ Student community · Demo mode</span><div class="avatar" title="Demo student">BL</div></div>
+  </header>
+
+  <section class="hero">
+    <div>
+      <div class="eyebrow">Read more. Waste less.</div>
+      <h1>Good books deserve a second chapter.</h1>
+      <p>Discover textbooks shared by students, pass on books you no longer need, and help knowledge travel further around campus.</p>
+      <button class="btn btn-primary" id="heroAdd">＋ List a book</button>
+      <button class="btn btn-light" id="browseBtn" style="margin-left:7px">Explore books ↓</button>
+    </div>
+    <div class="hero-art" aria-hidden="true"><div class="book-stack"><span class="spark a">✦</span><span class="spark b">✧</span><div class="book three">SHARE KNOWLEDGE</div><div class="book two">PASS IT ON</div><div class="book one">READ • REUSE • REPEAT</div></div></div>
+  </section>
+
+  <section class="stats" aria-label="Community stats">
+    <div class="stat"><div class="stat-icon">▤</div><div><strong id="statBooks">0</strong><span>Books listed</span></div></div>
+    <div class="stat"><div class="stat-icon">♡</div><div><strong id="statAvailable">0</strong><span>Available now</span></div></div>
+    <div class="stat"><div class="stat-icon">↔</div><div><strong id="statRequests">0</strong><span>Requests made</span></div></div>
+    <div class="stat"><div class="stat-icon">♻</div><div><strong id="statReused">0</strong><span>Books rehomed</span></div></div>
+  </section>
+
+  <section id="catalog">
+    <div class="section-head"><div><h2>Find your next read</h2><p>Student-shared books, ready for a new desk.</p></div><button class="btn btn-ghost" id="addTop">＋ Add a book</button></div>
+    <div class="tabs" role="tablist" aria-label="Book filters">
+      <button class="tab active" data-filter="All">All books</button><button class="tab" data-filter="Available">Available</button><button class="tab" data-filter="Reserved">Reserved</button><button class="tab" data-filter="Donated">Donated</button><button class="tab" data-filter="Exchanged">Exchanged</button>
+    </div>
+    <div class="toolbar">
+      <div class="search"><span>⌕</span><input id="searchInput" type="search" placeholder="Search title, author, subject…"></div>
+      <select class="select" id="subjectFilter" aria-label="Filter by subject"><option value="All">All subjects</option></select>
+      <select class="select" id="sortSelect" aria-label="Sort books"><option value="new">Recently added</option><option value="title">Title A–Z</option></select>
+    </div>
+    <div class="book-grid" id="bookGrid"></div>
+  </section>
+
+  <section class="lower">
+    <div class="panel">
+      <div class="panel-head"><h2>Request desk</h2><span class="tag orange" id="pendingCount">0 pending</span></div>
+      <div class="request-list" id="requestList"></div>
+      <div class="notice">Prototype note: admin actions are open for demonstration; this version has no login or server-side database.</div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><h2>How BookLoop works</h2><span class="tag">3 simple steps</span></div>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div><strong>Discover a book</strong><p>Search by title, author or subject and check availability.</p></div></div>
+        <div class="step"><div class="step-num">2</div><div><strong>Request or share</strong><p>Request a free donation or offer another book for exchange.</p></div></div>
+        <div class="step"><div class="step-num">3</div><div><strong>Coordinate the handover</strong><p>The request desk updates the status so students know what happens next.</p></div></div>
+      </div>
+    </div>
+  </section>
+  <footer class="footer"><span>BookLoop · OOPs Mini Project Prototype</span><span>Built for a more shareable campus 📚</span></footer>
+</div>
+
+<div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal"><div class="modal-head"><h2 id="modalTitle">List a book</h2><button class="close" id="closeModal" aria-label="Close">×</button></div><form id="bookForm">
+    <div class="form-grid">
+      <div class="field full"><label for="bookTitle">Book title *</label><input id="bookTitle" name="title" required maxlength="100" placeholder="e.g. Data Structures and Algorithms"></div>
+      <div class="field"><label for="bookAuthor">Author *</label><input id="bookAuthor" name="author" required maxlength="80" placeholder="Author name"></div>
+      <div class="field"><label for="bookSubject">Subject *</label><input id="bookSubject" name="subject" required maxlength="60" placeholder="e.g. DSA"></div>
+      <div class="field"><label for="bookCondition">Condition</label><select id="bookCondition" name="condition"><option>Good</option><option>Excellent</option><option>Used</option></select></div>
+      <div class="field"><label for="bookType">Sharing type</label><select id="bookType" name="type"><option>Donation</option><option>Exchange</option></select></div>
+      <div class="field"><label for="bookOwner">Your name *</label><input id="bookOwner" name="owner" required maxlength="60" placeholder="Student name"></div>
+      <div class="field"><label for="bookContact">Contact (demo) *</label><input id="bookContact" name="contact" required maxlength="80" placeholder="Email or phone"></div>
+      <div class="field full"><label for="bookNote">Short note (optional)</label><textarea id="bookNote" name="note" maxlength="220" placeholder="Edition, highlights, or preferred handover location"></textarea></div>
+    </div>
+    <div class="form-actions"><button type="button" class="btn btn-ghost" id="cancelModal">Cancel</button><button class="btn btn-primary" type="submit">Publish listing</button></div>
+  </form></div>
+</div>
+
+<div class="modal-backdrop" id="requestBackdrop" role="dialog" aria-modal="true" aria-labelledby="requestTitle">
+  <div class="modal"><div class="modal-head"><h2 id="requestTitle">Request this book</h2><button class="close" id="closeRequest" aria-label="Close">×</button></div><form id="requestForm">
+    <input type="hidden" id="requestBookId">
+    <div class="form-grid">
+      <div class="field full"><label for="requesterName">Your name *</label><input id="requesterName" required maxlength="60" placeholder="Student name"></div>
+      <div class="field full"><label for="requestType">Request type</label><select id="requestType"><option>Donation</option><option>Exchange</option></select></div>
+      <div class="field full hidden" id="offerWrap"><label for="offeredBook">Book you can offer in exchange *</label><input id="offeredBook" maxlength="100" placeholder="Title of your book"></div>
+      <div class="field full"><label for="requestMessage">Message to the owner</label><textarea id="requestMessage" maxlength="220" placeholder="I need this book for my semester…"></textarea></div>
+    </div>
+    <div class="notice" id="requestBookInfo"></div>
+    <div class="form-actions"><button type="button" class="btn btn-ghost" id="cancelRequest">Cancel</button><button class="btn btn-primary" type="submit">Send request</button></div>
+  </form></div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+const KEY = "bookloop_prototype_v1";
+const starterBooks = [
+ {id:1,title:"Data Structures & Algorithms",author:"Seymour Lipschutz",subject:"DSA",condition:"Good",type:"Donation",owner:"Aarav Kulkarni",contact:"aarav@example.edu",note:"Helpful for semester revision.",status:"Available",color:"#dcebb8",icon:"📗",created:1},
+ {id:2,title:"Object Oriented Programming with C++",author:"E. Balagurusamy",subject:"OOPs",condition:"Excellent",type:"Exchange",owner:"Mira Shah",contact:"mira@example.edu",note:"Looking to exchange for a DBMS book.",status:"Available",color:"#f0c2ad",icon:"📙",created:2},
+ {id:3,title:"Computer Networks",author:"Andrew S. Tanenbaum",subject:"BCN",condition:"Used",type:"Donation",owner:"Kabir Patil",contact:"kabir@example.edu",note:"Some highlighted sections.",status:"Reserved",color:"#c9d9ed",icon:"📘",created:3},
+ {id:4,title:"Database System Concepts",author:"Abraham Silberschatz",subject:"DBMS",condition:"Good",type:"Donation",owner:"Sana Deshmukh",contact:"sana@example.edu",note:"Latest class notes included.",status:"Available",color:"#e8d4f0",icon:"📕",created:4},
+ {id:5,title:"Let Us C",author:"Yashavant Kanetkar",subject:"Programming",condition:"Good",type:"Exchange",owner:"Rohan Joshi",contact:"rohan@example.edu",note:"Good beginner reference.",status:"Exchanged",color:"#f3df9d",icon:"📒",created:5},
+ {id:6,title:"Engineering Mathematics",author:"B. S. Grewal",subject:"Mathematics",condition:"Used",type:"Donation",owner:"Isha More",contact:"isha@example.edu",note:"A few pencil notes in the margins.",status:"Available",color:"#c8e2d5",icon:"📔",created:6}
+];
+const starterRequests = [
+ {id:1,bookId:3,requester:"Dev Nair",type:"Donation",offered:"",message:"Could I collect this after class?",status:"Pending",created:1}
+];
+let state = loadState();
+let currentFilter = "All";
+let toastTimer;
+function loadState(){
+ try { const raw=localStorage.getItem(KEY); if(raw){const parsed=JSON.parse(raw);if(parsed&&Array.isArray(parsed.books)&&Array.isArray(parsed.requests))return parsed;} } catch(e){}
+ return {books:starterBooks.map(b=>({...b})),requests:starterRequests.map(r=>({...r})),nextBookId:7,nextRequestId:2};
+}
+function saveState(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){showToast("Browser storage unavailable. Changes may not persist.");}}
+function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function showToast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove("show"),2600);}
+function setModal(id,open){document.getElementById(id).classList.toggle("open",open);}
+function resetDemo(){state={books:starterBooks.map(b=>({...b})),requests:starterRequests.map(r=>({...r})),nextBookId:7,nextRequestId:2};saveState();render();showToast("Demo data reset.");}
+function renderStats(){
+ document.getElementById("statBooks").textContent=state.books.length;
+ document.getElementById("statAvailable").textContent=state.books.filter(b=>b.status==="Available").length;
+ document.getElementById("statRequests").textContent=state.requests.length;
+ document.getElementById("statReused").textContent=state.books.filter(b=>["Donated","Exchanged"].includes(b.status)).length;
+ document.getElementById("pendingCount").textContent=state.requests.filter(r=>r.status==="Pending").length+" pending";
+}
+function renderSubjects(){
+ const select=document.getElementById("subjectFilter"), old=select.value;
+ const subjects=[...new Set(state.books.map(b=>b.subject).filter(Boolean))].sort();
+ select.innerHTML='<option value="All">All subjects</option>'+subjects.map(s=>`<option value="${esc(s)}">${esc(s)}</option>`).join("");
+ if(subjects.includes(old))select.value=old;
+}
+function renderBooks(){
+ const query=document.getElementById("searchInput").value.trim().toLowerCase();
+ const subject=document.getElementById("subjectFilter").value;
+ const sort=document.getElementById("sortSelect").value;
+ let list=state.books.filter(b=>(currentFilter==="All"||b.status===currentFilter)&&(subject==="All"||b.subject===subject)&&[b.title,b.author,b.subject,b.owner].some(x=>String(x).toLowerCase().includes(query)));
+ list.sort(sort==="title"?(a,b)=>a.title.localeCompare(b.title):(a,b)=>b.created-a.created);
+ const grid=document.getElementById("bookGrid");
+ if(!list.length){grid.innerHTML='<div class="empty"><div style="font-size:32px;margin-bottom:8px">📚</div><strong>No books found</strong><div style="font-size:13px;margin-top:5px">Try a different search or add a new listing.</div></div>';return;}
+ grid.innerHTML=list.map(b=>{
+  const statusClass=b.status==="Available"?"":b.status==="Reserved"?"orange":"gray";
+  const btn=b.status==="Available"?`<button class="btn btn-primary" data-request="${b.id}">Request ↗</button>`:`<button class="btn btn-ghost" disabled>${esc(b.status)}</button>`;
+  return `<article class="book-card">
+    <div class="cover" style="background:${esc(b.color||"#dcebb8")}"><span class="cover-icon">${esc(b.icon||"📚")}</span><span class="cover-label">BOOKLOOP · CAMPUS EDITION</span></div>
+    <span class="tag ${statusClass}">${esc(b.status)}</span>
+    <h3>${esc(b.title)}</h3><div class="author">by ${esc(b.author)}</div>
+    <div class="meta"><span>${esc(b.subject)}</span><span>${esc(b.condition)}</span><span>${esc(b.type)}</span></div>
+    ${b.note?`<p style="font-size:12px;color:#69766e;margin:0 0 12px">${esc(b.note)}</p>`:""}
+    <div class="card-bottom"><div class="owner">Shared by<strong>${esc(b.owner)}</strong></div>${btn}</div>
+  </article>`;
+ }).join("");
+ grid.querySelectorAll("[data-request]").forEach(btn=>btn.addEventListener("click",()=>openRequest(Number(btn.dataset.request))));
+}
+function renderRequests(){
+ const el=document.getElementById("requestList");
+ if(!state.requests.length){el.innerHTML='<div class="empty" style="padding:24px">No requests yet. Request an available book to see it here.</div>';return;}
+ const sorted=[...state.requests].sort((a,b)=>b.created-a.created);
+ el.innerHTML=sorted.map(r=>{
+  const book=state.books.find(b=>b.id===r.bookId);
+  const actions=r.status==="Pending"?`<div class="request-actions"><button class="btn btn-primary" data-approve="${r.id}">Approve</button><button class="btn btn-danger" data-reject="${r.id}">Reject</button></div>`:`<span class="status ${esc(r.status)}">${esc(r.status)}</span>`;
+  return `<div class="request"><div style="min-width:0"><h4>${esc(book?book.title:"Book removed")} · ${esc(r.type)}</h4><p>From ${esc(r.requester)}${r.offered?" · Offers: "+esc(r.offered):""}</p>${r.message?`<p style="margin-top:4px">${esc(r.message)}</p>`:""}</div>${actions}</div>`;
+ }).join("");
+ el.querySelectorAll("[data-approve]").forEach(b=>b.addEventListener("click",()=>reviewRequest(Number(b.dataset.approve),"Approved")));
+ el.querySelectorAll("[data-reject]").forEach(b=>b.addEventListener("click",()=>reviewRequest(Number(b.dataset.reject),"Rejected")));
+}
+function render(){renderStats();renderSubjects();renderBooks();renderRequests();}
+function openAdd(){document.getElementById("bookForm").reset();setModal("modalBackdrop",true);setTimeout(()=>document.getElementById("bookTitle").focus(),50);}
+function openRequest(id){
+ const book=state.books.find(b=>b.id===id);
+ if(!book||book.status!=="Available"){showToast("This book is no longer available.");return;}
+ document.getElementById("requestForm").reset();document.getElementById("requestBookId").value=id;
+ document.getElementById("requestBookInfo").textContent=`Requesting: ${book.title} by ${book.author} · Shared by ${book.owner}`;
+ document.getElementById("offerWrap").classList.add("hidden");document.getElementById("offeredBook").required=false;
+ setModal("requestBackdrop",true);setTimeout(()=>document.getElementById("requesterName").focus(),50);
+}
+function reviewRequest(id,decision){
+ const req=state.requests.find(r=>r.id===id);
+ if(!req||req.status!=="Pending")return;
+ req.status=decision;
+ const book=state.books.find(b=>b.id===req.bookId);
+ if(decision==="Approved"&&book){book.status=req.type==="Donation"?"Donated":"Exchanged";}
+ if(decision==="Rejected"&&book){
+  const another=state.requests.some(r=>r.bookId===book.id&&r.id!==req.id&&r.status==="Pending");
+  if(!another)book.status="Available";
+ }
+ saveState();render();showToast(`Request ${decision.toLowerCase()}.`);
+}
+document.getElementById("heroAdd").addEventListener("click",openAdd);
+document.getElementById("addTop").addEventListener("click",openAdd);
+document.getElementById("browseBtn").addEventListener("click",()=>document.getElementById("catalog").scrollIntoView({behavior:"smooth"}));
+document.getElementById("closeModal").addEventListener("click",()=>setModal("modalBackdrop",false));
+document.getElementById("cancelModal").addEventListener("click",()=>setModal("modalBackdrop",false));
+document.getElementById("closeRequest").addEventListener("click",()=>setModal("requestBackdrop",false));
+document.getElementById("cancelRequest").addEventListener("click",()=>setModal("requestBackdrop",false));
+document.getElementById("modalBackdrop").addEventListener("click",e=>{if(e.target.id==="modalBackdrop")setModal("modalBackdrop",false)});
+document.getElementById("requestBackdrop").addEventListener("click",e=>{if(e.target.id==="requestBackdrop")setModal("requestBackdrop",false)});
+document.getElementById("bookType").addEventListener("change",e=>{document.getElementById("bookNote").placeholder=e.target.value==="Exchange"?"What kind of book would you like in return?":"Edition, highlights, or preferred handover location";});
+document.getElementById("requestType").addEventListener("change",e=>{const isExchange=e.target.value==="Exchange";document.getElementById("offerWrap").classList.toggle("hidden",!isExchange);document.getElementById("offeredBook").required=isExchange;});
+document.getElementById("bookForm").addEventListener("submit",e=>{
+ e.preventDefault();const f=new FormData(e.currentTarget);
+ const colors=["#dcebb8","#f0c2ad","#c9d9ed","#e8d4f0","#f3df9d","#c8e2d5"];
+ const icons=["📗","📙","📘","📕","📒","📔"];
+ const id=state.nextBookId++;
+ state.books.push({id,title:f.get("title").trim(),author:f.get("author").trim(),subject:f.get("subject").trim(),condition:f.get("condition"),type:f.get("type"),owner:f.get("owner").trim(),contact:f.get("contact").trim(),note:f.get("note").trim(),status:"Available",color:colors[(id-1)%colors.length],icon:icons[(id-1)%icons.length],created:Date.now()});
+ saveState();setModal("modalBackdrop",false);render();showToast("Your book listing is live!");document.getElementById("searchInput").value="";currentFilter="All";document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active",t.dataset.filter==="All"));renderBooks();
+});
+document.getElementById("requestForm").addEventListener("submit",e=>{
+ e.preventDefault();const id=Number(document.getElementById("requestBookId").value),book=state.books.find(b=>b.id===id);
+ if(!book||book.status!=="Available"){showToast("Sorry, this book is no longer available.");setModal("requestBackdrop",false);return;}
+ const type=document.getElementById("requestType").value,offered=document.getElementById("offeredBook").value.trim();
+ if(type==="Exchange"&&!offered){showToast("Enter the book you can offer.");return;}
+ const req={id:state.nextRequestId++,bookId:id,requester:document.getElementById("requesterName").value.trim(),type,offered: type==="Exchange"?offered:"",message:document.getElementById("requestMessage").value.trim(),status:"Pending",created:Date.now()};
+ state.requests.push(req);book.status="Reserved";saveState();setModal("requestBackdrop",false);render();showToast("Request sent. Book marked Reserved.");document.getElementById("catalog").scrollIntoView({behavior:"smooth",block:"start"});
+});
+document.getElementById("searchInput").addEventListener("input",renderBooks);
+document.getElementById("subjectFilter").addEventListener("change",renderBooks);
+document.getElementById("sortSelect").addEventListener("change",renderBooks);
+document.querySelectorAll(".tab").forEach(tab=>tab.addEventListener("click",()=>{currentFilter=tab.dataset.filter;document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active",t===tab));renderBooks();}));
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){setModal("modalBackdrop",false);setModal("requestBackdrop",false);}});
+render();
+</script>
+</body>
+</html>
